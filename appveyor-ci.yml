@@ -1,0 +1,12 @@
+# Note: Alternative is to add .patch to github URL link to view detailed commit information
+
+
+clone_depth: 1
+
+
+
+
+build_script:
+
+  - cmd: |
+      git log -5
