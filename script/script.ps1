@@ -5,4 +5,4 @@ $env:GIT_SCRIPT = "https://github.com/${env:GIT_SCRIPT}/appveyor-ci/raw/${GIT_SC
 $env:PATH = ${env:APPVEYOR_BUILD_FOLDER} + ";" + ${env:PATH}
 
 
-echo "CI System: ${env:APPVEYOR_BUILD_WORKER_IMAGE}`n`n"
+echo "`nCI System: ${env:APPVEYOR_BUILD_WORKER_IMAGE}`n`n"
