@@ -77,7 +77,7 @@ foreach( $branch in $branches ) {
     git rebase upstream/master
   }
 
-  else if( $branch -Eq "main" ) {
+  elseif( $branch -Eq "main" ) {
     git rebase upstream/main
   }
 
