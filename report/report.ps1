@@ -6,7 +6,7 @@ $wait2 = 75
 
 
 
-echo "`n`nGithub: ${env:GIT_USER}`n"
+echo "`n`nGitHub: ${env:GIT_USER}`n"
 
 
 
