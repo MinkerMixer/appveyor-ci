@@ -31,7 +31,7 @@ if( $MERGE -Ge $MAX ) {
 
 
 if( $MERGE -Ge 1 ) {
-  $TITLE = git log -1 --skip=$MERGE --pretty=format:'%s%n%b'
+  $TITLE = git log -5 --skip=$MERGE --pretty=format:'%s%n%b'
 
 
   git reset --soft HEAD~$MERGE
