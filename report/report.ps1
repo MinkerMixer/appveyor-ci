@@ -25,7 +25,7 @@ while(1) {
 
 
 
-  ; Users
+  # Users
   foreach( $repo in Select-String -Path "C:\list.txt" -Pattern "<a href=`"(.+)`" itemprop=`"name codeRepository`"" ) {
     $repo = ($repo -Split "<a href=`"/${env:GIT_USER}/(.+)`" itemprop=`"name codeRepository`"")[1]
 
@@ -41,7 +41,7 @@ while(1) {
 
 
 
-  ; Organizations
+  # Organizations
   foreach( $repo in Select-String -Path "C:\list.txt" -Pattern "/hovercard`" href=`"(.+)`" class=`"d-inline-block`">" ) {
     $repo = ($repo -Split "/hovercard`" href=`"/${env:GIT_USER}/(.+)`" class=`"d-inline-block`">")[1]
 
