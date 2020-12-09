@@ -42,6 +42,9 @@ if ($merge -Ge $max) {
 }
 
 
+echo $merge
+git log -5
+
 
 if ($merge -Ge 1) {
   $title = git log -1 --skip=$merge --pretty=format:'%s%n%b'
