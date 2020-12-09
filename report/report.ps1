@@ -2,11 +2,11 @@ $url = "https://github.com/${env:GIT_USER}?tab=repositories"
 
 
 $wait1 = 200
-$wait2 = 50
+$wait2 = 100
 
 
 
-echo "`n`nGithub: ${env:GIT_USER}`n`n"
+echo "`n`nGithub: ${env:GIT_USER}`n"
 
 
 
