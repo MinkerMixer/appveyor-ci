@@ -35,9 +35,9 @@ if( $env:GIT_ERASE -Ne 0 ) {
 curl -o "C:\repo.txt" "https://github.com/${env:APPVEYOR_REPO_NAME}"
 
 
-$GIT_UPSTREAM = (((Get-Content "C:\repo.txt" -Raw) -Split "forked from")[1] -Split "`">(.+)</a>")[1]
+$GIT_UPSTREAM = ( ((Get-Content "C:\repo.txt" -Raw) -Split "forked from")[1] -Split "`">(.+)</a>" )[1]
 
-$GIT_DEFAULT = ((Get-Content "C:\repo.txt" -Raw) -Split "<span class=`"css-truncate-target`" data-menu-button>(.+)</span>")[1]
+$GIT_DEFAULT = ( (Get-Content "C:\repo.txt" -Raw) -Split "<span class=`"css-truncate-target`" data-menu-button>(.+)</span>")[1]
 
 
 
@@ -56,7 +56,7 @@ $branches = git branch -r | Select-String -NotMatch "upstream"
 
 
 foreach( $branch in $branches ) {
-  $branch = (($branch -Replace '(^\s+|\s+$)','') -Split '/')[1]
+  $branch = ( ($branch -Replace '(^\s+|\s+$)','') -Split '/' )[1]
 
   echo "`n${branch}"
 
@@ -65,7 +65,7 @@ foreach( $branch in $branches ) {
   git checkout origin/${branch}
 
 
-  iex( (New-Object System.Net.WebClient).DownloadString("${env:GIT_SCRIPT}/squash/squash.ps1") )
+  iex( (New-Object System.Net.WebClient).DownloadString( "${env:GIT_SCRIPT}/squash/squash.ps1" ) )
 
 
 
@@ -75,6 +75,10 @@ foreach( $branch in $branches ) {
 
   if( $branch -Eq "master" ) {
     git rebase upstream/master
+  }
+
+  else if( $branch -Eq "main" ) {
+    git rebase upstream/main
   }
 
   else {
@@ -88,7 +92,7 @@ foreach( $branch in $branches ) {
     git diff --diff-filter=U
 
 
-    if( ${env:GIT_FORCE } -Ne "yes") {
+    if( ${env:GIT_FORCE} -Ne "yes") {
       throw "${branch}: rebase failure"
     }
 
