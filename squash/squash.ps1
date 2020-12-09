@@ -1,35 +1,22 @@
-$merge = 0
-$max = git rev-list --count HEAD
-
-
-
-if( ${env:GIT_SQUASH} -Lt 0 ) {
-  exit
+if( ${env:GIT_SQUASH} -Ge 0 ) {
+  $MERGE = ${env:GIT_SQUASH}
 }
 
-
-
-###################################################
-
-
-
-if( ${env:GIT_SQUASH} -Ge 1 ) {
-  $merge = ${env:GIT_SQUASH}
-}
 
 else {
-  while ($merge -Lt $max) {
-    if ((git log -1 --skip=$merge --pretty=format:'%an') -Match ${env:APPVEYOR_REPO_COMMIT_AUTHOR} -Eq $False) {
+  $MERGE = 0
+  $MAX = git rev-list --count HEAD
+
+
+  while( $MERGE -Lt $MAX ) {
+    if(( git log -1 --skip=$MERGE --pretty=format:'%an' ) -Match ${env:APPVEYOR_REPO_COMMIT_AUTHOR} -Eq $False ) {
       break
     }
 
 
-    $merge = $merge + 1
+    $MERGE = $MERGE + 1
   }
 }
-
-
-$merge = $merge - 1
 
 
 
@@ -37,19 +24,16 @@ $merge = $merge - 1
 
 
 
-if ($merge -Ge $max) {
-  $merge = $merge - 1
+if( $MERGE -Ge $MAX ) {
+  $MERGE = $MAX - 1
 }
 
 
-echo $merge
-git log -5
+
+if( $MERGE -Ge 1 ) {
+  $TITLE = git log -1 --skip=$MERGE --pretty=format:'%s%n%b'
 
 
-if ($merge -Ge 1) {
-  $title = git log -1 --skip=$merge --pretty=format:'%s%n%b'
-
-
-  git reset --soft HEAD~$merge
-  git commit --amend -m "$title" --date "$(date)" --author="${env:AUTHOR} <${env:EMAIL}>"
+  git reset --soft HEAD~$MERGE
+  # git push -f -m "$TITLE" --author="${env:GIT_AUTHOR} <${env:GIT_EMAIL}>"
 }
