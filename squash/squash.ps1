@@ -13,6 +13,8 @@ if( ${env:GIT_SQUASH} -Ge 0 ) {
 
 
 else {
+  echo "bb"
+
   while( $MERGE -Lt $MAX ) {
     if(( git log -1 --skip=$MERGE --pretty=format:'%an' ) -Match ${env:GIT_AUTHOR} -Eq $False ) {
       break
