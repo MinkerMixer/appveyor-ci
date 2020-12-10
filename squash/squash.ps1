@@ -39,6 +39,7 @@ $MESSAGE = git log -1 --skip=${ $MERGE } --pretty=format:'%s%n%b'
 
 echo $MERGE
 echo $MESSAGE
+echo ${ $MERGE }
 
 
 if( $MERGE -Eq $MAX) {
