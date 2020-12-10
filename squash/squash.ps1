@@ -52,7 +52,7 @@ if( $MERGE -Eq $MAX) {
 
 
 elseif( $MERGE -Ge 1 ) {
-  git reset --soft HEAD~( $MERGE )
+  git reset --soft HEAD~{$MERGE}
   echo "3d"
   git commit -m "$MESSAGE" --author="${env:GIT_AUTHOR} <${env:GIT_EMAIL}>"
   echo "3e"
