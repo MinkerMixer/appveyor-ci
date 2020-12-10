@@ -1,9 +1,9 @@
-if( ${env:GIT_SQUASH } -Eq "yes") {
-  ${env:GIT_SQUASH} = 0
+if( ${env:GIT_SQUASH} -Eq "yes" ) {
+  ${env:GIT_SQUASH} = -1
 }
 
 else {
-  ${env:GIT_SQUASH} = -1
+  ${env:GIT_SQUASH} = 0
 }
 
 
@@ -32,6 +32,7 @@ if( $env:GIT_ERASE -Ne 0 ) {
 
 
 
+echo "https://github.com/${env:APPVEYOR_REPO_NAME}"
 curl -o "C:\repo.txt" "https://github.com/${env:APPVEYOR_REPO_NAME}"
 
 
@@ -45,6 +46,7 @@ $GIT_DEFAULT = ( (Get-Content "C:\repo.txt" -Raw) -Split "<span class=`"css-trun
 
 
 
+echo "https://github.com/${GIT_UPSTREAM}.git"
 git remote add upstream "https://github.com/${GIT_UPSTREAM}.git"
 
 git fetch upstream master:upstream --no-tags
@@ -56,7 +58,7 @@ $branches = git branch -r | Select-String -NotMatch "upstream"
 
 
 foreach( $branch in $branches ) {
-  $branch = ( ($branch -Replace '(^\s+|\s+$)','') -Split '/' )[1]
+  $branch = (( $branch -Replace '(^\s+|\s+$)','' ) -Split '/' )[1]
 
   echo "`n${branch}"
 
@@ -65,7 +67,7 @@ foreach( $branch in $branches ) {
   git checkout origin/${branch}
 
 
-  iex( (New-Object System.Net.WebClient).DownloadString( "${env:GIT_SCRIPT}/squash/squash.ps1" ) )
+  iex(( New-Object System.Net.WebClient ).DownloadString( "${env:GIT_SCRIPT}/squash/squash.ps1" ))
 
 
 
@@ -92,7 +94,7 @@ foreach( $branch in $branches ) {
     git diff --diff-filter=U
 
 
-    if( ${env:GIT_FORCE} -Ne "yes") {
+    if( ${env:GIT_FORCE} -Ne "yes" ) {
       throw "${branch}: rebase failure"
     }
 
