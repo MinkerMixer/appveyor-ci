@@ -46,7 +46,6 @@ if( $MERGE -Eq $MAX) {
 }
 
 
-echo "3c"
 elseif( $MERGE -Ge 1 ) {
   git reset --soft HEAD~$MERGE
   echo "3d"
