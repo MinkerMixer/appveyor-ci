@@ -7,7 +7,7 @@ $MAX = git rev-list --count HEAD
 
 
 
-if( ${env:GIT_SQUASH} -Ge 0 ) {
+if( [int] ${env:GIT_SQUASH} -Ge 0 ) {
   $MERGE = ${env:GIT_SQUASH}
 }
 
@@ -39,20 +39,20 @@ if( $MERGE -Ge $MAX ) {
 
 echo $MERGE
 
-$MESSAGE = git log -1 --skip=($MERGE-1) --pretty=format:'%s%n%b'
+$MESSAGE = git log -1 --skip=( $MERGE-1 ) --pretty=format:'%s%n%b'
 
 
 echo "3a"
 if( $MERGE -Eq $MAX) {
   echo "3b"
 
-  git reset --soft HEAD~${MERGE-1}
+  git reset --soft HEAD~( $MERGE-1 )
   git commit --amend -m "$MESSAGE" --author="${env:GIT_AUTHOR} <${env:GIT_EMAIL}>"
 }
 
 
 elseif( $MERGE -Ge 1 ) {
-  git reset --soft HEAD~${MERGE}
+  git reset --soft HEAD~( $MERGE )
   echo "3d"
   git commit -m "$MESSAGE" --author="${env:GIT_AUTHOR} <${env:GIT_EMAIL}>"
   echo "3e"
