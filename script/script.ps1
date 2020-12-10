@@ -1,4 +1,4 @@
-$GIT_SCRIPT_HEAD = git ls-remote https://github.com/${env:GIT_SCRIPT}/appveyor-git.git HEAD | awk '{ print $1}'
+$GIT_SCRIPT_HEAD = git ls-remote https://github.com/${env:GIT_SCRIPT}/appveyor-git.git HEAD | awk '{ print $1 }'
 
 
 $env:GIT_SCRIPT = "https://github.com/${env:GIT_SCRIPT}/appveyor-git/raw/${GIT_SCRIPT_HEAD}"
