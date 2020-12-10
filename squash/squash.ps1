@@ -35,17 +35,17 @@ if( $MERGE -Ge $MAX ) {
 
 
 
-$MESSAGE = git log -1 --skip=$( $MERGE ) --pretty=format:'%s%n%b'
+$MESSAGE = git log -1 --skip=$( $MERGE-1 ) --pretty=format:'%s%n%b'
 
 
 
-if( $MERGE -Eq $MAX) {
+if( $MERGE -Eq $MAX ) {
   git reset --soft HEAD~$( $MERGE-1 )
   git commit --amend -m "$MESSAGE" --author="${env:GIT_AUTHOR} <${env:GIT_EMAIL}>"
 }
 
 
-elseif( $MERGE -Ge 1 ) {
+elseif( $MERGE -Ge 2 ) {
   git reset --soft HEAD~$( $MERGE )
   git commit -m "$MESSAGE" --author="${env:GIT_AUTHOR} <${env:GIT_EMAIL}>"
 }
