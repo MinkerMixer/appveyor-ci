@@ -1,5 +1,5 @@
-$MERGE = 0
-$MAX = $(git rev-list --count HEAD)
+[int] $MERGE = 0
+[int] $MAX = $(git rev-list --count HEAD)
 
 
 
@@ -28,6 +28,7 @@ echo $MERGE
 echo $MAX
 
 
+$MERGE -Ge $MAX
 if( $MERGE -Ge $MAX ) {
   $MERGE = $MAX
 }
