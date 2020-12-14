@@ -11,7 +11,6 @@ if( [int] ${env:GIT_SQUASH} -Ge 0 ) {
   $MERGE = ${env:GIT_SQUASH}
 }
 
-
 else {
   while( $MERGE -Lt $MAX ) {
     if(( git log -1 --skip=$MERGE --pretty=format:'%an' ) -Match ${env:GIT_AUTHOR} -Eq $False ) {
@@ -29,6 +28,9 @@ if( $MERGE -Ge $MAX ) {
   $MERGE = $MAX
 }
 
+
+echo $MAX
+echo $MERGE
 
 
 ###################################################
