@@ -46,6 +46,6 @@ if( $MERGE -Eq $MAX ) {
 
 
 elseif( $MERGE -Ge 2 ) {
-  git reset --soft HEAD~$( $MERGE )
+  git reset --soft HEAD~$MERGE
   git commit -m "$MESSAGE" --author="${env:GIT_AUTHOR} <${env:GIT_EMAIL}>"
 }
