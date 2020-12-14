@@ -89,9 +89,9 @@ function global:git_merge($branch) {
 
 
 function global:git_modify($file, $mode) {
-  ren ${file} ${file}___1
+  Move-Item -Path ${file} -Destination ${file}___1
   git add . --force
-  ren ${file}___1 ${file}
+  Move-Item -Path ${file}___1 -Destination ${file}
 
 
   c:\msys64\mingw64\bin\git_edit.exe ${file} ${mode}
