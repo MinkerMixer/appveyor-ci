@@ -7,7 +7,7 @@
 
 
 
-if( [int] ${env:GIT_SQUASH} -Ge 0 ) {
+if( ${env:GIT_SQUASH} -Ge 0 ) {
   $MERGE = ${env:GIT_SQUASH}
 }
 
@@ -24,18 +24,10 @@ else {
 
 
 
-echo $MERGE
-echo $MAX
-
-
-$MERGE -Ge $MAX
 if( $MERGE -Ge $MAX ) {
   $MERGE = $MAX
 }
 
-
-echo $MAX
-echo $MERGE
 
 
 ###################################################
