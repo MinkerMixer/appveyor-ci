@@ -28,9 +28,13 @@ echo $MAX
 echo $MERGE
 
 
-if( $MERGE -Ge $MAX ) {
+if( $($MERGE) -Ge $($MAX) ) {
   $MERGE = $MAX
 }
+
+
+echo $MAX
+echo $MERGE
 
 
 ###################################################
