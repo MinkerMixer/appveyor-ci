@@ -1,4 +1,4 @@
-if ($env:CLEAN -Eq "yes") {
+if ($env:GIT_CLEAN -Eq "yes") {
   cd $env:APPVEYOR_BUILD_FOLDER
 
   move $env:GIT_ARCHIVE ..\
@@ -39,4 +39,4 @@ $title = git log -1 --pretty=format:'%s'
 
 
 git reset --soft HEAD~1
-git commit -m "$title" --date "$(date)"
+git commit -m "$title"
